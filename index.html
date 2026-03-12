@@ -57,9 +57,9 @@
 
                             <h3>[Your New Section Title Here]</h3>
                             <span class="image main"><img src="images/File-Permissions.png" alt="Description of your new image" /></span>
-                            <p>[Your descriptive text for the new image goes here.]</p>
+                            <p>Organized the Active Directory structure within mydomain.com using custom OUs to separate administrative accounts (_ADMINS), standard user accounts (_USERS), and resource-related objects (File Access, Security Groups). Created role-based security groups under the Security Groups → Shared File Access OU, including sf-tech, sf-HR, sf-accounts, and It-Admins Users. These security groups are used to control NTFS permissions on the file server shares and to drive item-level targeting in Group Policy Preferences for mapped drive assignments. Nested groups (HR users, mydomain admins) were configured under Shared File Access to simplify permission management — users are added to the nested group, which inherits access through the parent security group.</p>
 							<span class="image main"><img src="images/File-Share.png" /></span>
-                            <p>[Your descriptive text for the new image goes here.]</p>
+                            <p>Verified successful Group Policy application on a domain-joined Windows client. The mapped network drive 'Shares (J:)' appears under Network locations, confirming the GPO-driven drive mapping is functioning correctly. The J: drive points to the file server share with 0.99 GB of allocated storage (0.98 GB free), accessible based on the user's security group membership in Active Directory. This validates the end-to-end workflow: user authenticates to the domain → Group Policy processes at logon → drive map is applied based on security group targeting → user has seamless access to their department's shared files without manual configuration.</p>
                         </article>
 
 						<!-- Work -->
