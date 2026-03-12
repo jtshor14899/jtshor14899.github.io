@@ -1270,13 +1270,13 @@ input, select, textarea {
 
 			#header > *:before {
 				content: '';
-				display: block;
+			display: none;
 				position: absolute;
 				top: calc(-3.5rem - 1px);
 				left: calc(50% - 1px);
 				width: 1px;
 				height: calc(3.5rem + 1px);
-				background: #ffffff;
+			background: transparent;
 			}
 
 		#header > :first-child {
@@ -1302,8 +1302,8 @@ input, select, textarea {
 		#header .content {
 			border-style: solid;
 			border-color: #ffffff;
-			border-top-width: 1px;
-			border-bottom-width: 1px;
+			border-top-width: 0;
+			border-bottom-width: 0;
 			max-width: 100%;
 		}
 
@@ -1340,13 +1340,13 @@ input, select, textarea {
 			margin-bottom: 0;
 			list-style: none;
 			padding-left: 0;
-			border: solid 1px #ffffff;
-			border-radius: 4px;
+			border: none;
+			border-radius: 0;
 		}
 
 			#header nav ul li {
 				padding-left: 0;
-				border-left: solid 1px #ffffff;
+			border-left: none;
 			}
 
 				#header nav ul li:first-child {
@@ -1658,50 +1658,3 @@ input, select, textarea {
 		}
 
 
-
-/* Header overrides */
-
-	#header > *:before {
-		display: none !important;
-	}
-
-	#header .content {
-		border-top: none !important;
-		border-bottom: none !important;
-	}
-
-	#header > * {
-		margin-top: 1.5rem;
-	}
-
-	#header nav ul {
-		display: flex !important;
-		justify-content: center;
-		gap: 1.5rem;
-		border: none !important;
-		border-radius: 0 !important;
-		flex-wrap: wrap;
-	}
-
-	#header nav ul li {
-		border: none !important;
-		border-left: none !important;
-		padding-left: 0;
-	}
-
-	#header nav ul li a {
-		min-width: 0;
-		padding: 0.5rem 0;
-		border-bottom: none !important;
-		letter-spacing: 0.2rem;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		opacity: 0.65;
-		background: transparent !important;
-	}
-
-	#header nav ul li a:hover,
-	#header nav ul li a:active {
-		background: transparent !important;
-		opacity: 1;
-	}
