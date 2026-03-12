@@ -55,7 +55,7 @@
                             <p>Configured DHCP on the domain controller (dc.mydomain.com) with an IPv4 scope of 172.16.0.100-200 on the 172.16.0.0/24 network. Set scope options for default gateway, DNS server, and domain name. Created a DHCP reservation for the file server (172.16.0.100) to ensure consistent IP assignment for domain-joined services relying on SMB and DNS resolution."</p>
                             <hr />
 
-                            <h3>[Your New Section Title Here]</h3>
+                            <h3>Active Directory Users and Computers</h3>
                             <span class="image main"><img src="images/File-Permissions.png" alt="Description of your new image" /></span>
                             <p>Organized the Active Directory structure within mydomain.com using custom OUs to separate administrative accounts (_ADMINS), standard user accounts (_USERS), and resource-related objects (File Access, Security Groups). Created role-based security groups under the Security Groups → Shared File Access OU, including sf-tech, sf-HR, sf-accounts, and It-Admins Users. These security groups are used to control NTFS permissions on the file server shares and to drive item-level targeting in Group Policy Preferences for mapped drive assignments. Nested groups (HR users, mydomain admins) were configured under Shared File Access to simplify permission management — users are added to the nested group, which inherits access through the parent security group.</p>
 							<span class="image main"><img src="images/File-Share.png" /></span>
