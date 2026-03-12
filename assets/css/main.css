@@ -1656,25 +1656,9 @@ input, select, textarea {
 		body.is-preload #footer {
 			opacity: 0;
 		}
-/* Nav equal-width fix */
 
-	#header nav:before {
-		display: none !important;
-		background: transparent !important;
-	}
 
-	#header nav ul li {
-		flex: 1 0 0;
-	}
-
-	#header nav ul li a {
-		min-width: 0;
-		width: 100%;
-		text-align: center;
-		padding: 0 1rem;
-	}
-
-/* Simple header redesign */
+/* Header overrides */
 
 	#header > *:before {
 		display: none !important;
@@ -1686,4 +1670,20 @@ input, select, textarea {
 
 	#header > * {
 		margin-top: 1.5rem;
+	}
+
+	#header nav ul {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	#header nav ul li {
+		padding-left: 0;
+	}
+
+	#header nav ul li a {
+		min-width: 0;
+		width: 100%;
+		text-align: center;
+		padding: 0 1rem;
 	}
