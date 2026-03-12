@@ -1673,17 +1673,31 @@ input, select, textarea {
 	}
 
 	#header nav ul {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		display: flex;
+		justify-content: center;
+		gap: 0.5rem;
+		border: none;
+		border-radius: 0;
+		flex-wrap: wrap;
 	}
 
 	#header nav ul li {
+		border: none;
 		padding-left: 0;
 	}
 
 	#header nav ul li a {
 		min-width: 0;
-		width: 100%;
-		text-align: center;
-		padding: 0 1rem;
+		padding: 0.5rem 1.5rem;
+		border-bottom: none;
+		letter-spacing: 0.2rem;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		opacity: 0.6;
+		transition: opacity 0.2s ease;
+	}
+
+	#header nav ul li a:hover {
+		background-color: transparent;
+		opacity: 1;
 	}
