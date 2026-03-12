@@ -1656,3 +1656,19 @@ input, select, textarea {
 		body.is-preload #footer {
 			opacity: 0;
 		}
+/* Nav equal-width fix */
+
+	#header nav:before {
+		display: none;
+	}
+
+	#header nav ul li {
+		flex: 1 0 0;
+	}
+
+	#header nav ul li a {
+		min-width: 0;
+		width: 100%;
+		text-align: center;
+		padding: 0 1rem;
+	}
