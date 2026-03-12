@@ -1375,7 +1375,7 @@ input, select, textarea {
 
 		#header nav.use-middle:after {
 			content: '';
-			display: block;
+			display: none;
 			position: absolute;
 			top: 0;
 			left: calc(50% - 1px);
