@@ -1659,7 +1659,8 @@ input, select, textarea {
 /* Nav equal-width fix */
 
 	#header nav:before {
-		display: none;
+		display: none !important;
+		background: transparent !important;
 	}
 
 	#header nav ul li {
