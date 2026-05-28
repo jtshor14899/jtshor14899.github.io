@@ -1,373 +1,444 @@
-<!DOCTYPE HTML>
-<!--
-	Dimension by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>James Tyler Short</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>James Tyler Short — Cybersecurity</title>
+  <meta name="description" content="James Tyler Short — cybersecurity professional in North Georgia. Detection engineering, network security, and self-hosted security operations. Creator of threat-dash." />
+  <meta name="author" content="James Tyler Short" />
+  <meta name="theme-color" content="#0a0f16" />
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+  <!-- Open Graph / social preview (for when a recruiter shares the link) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="James Tyler Short — Cybersecurity" />
+  <meta property="og:description" content="Detection engineering, network security, and self-hosted security operations. Creator of the open-source threat-dash security console." />
+  <meta property="og:image" content="images/td-hero.png" />
+  <meta property="og:url" content="https://jtshor14899.github.io/" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-				<!-- Header -->
-					<header id="header">
-						<div class="content">
-							<div class="inner">
-								<h1>James Tyler Short</h1>
-								<p>This is my home lab documentation, project work, and pet project that I recently started.</p>
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#intro">HomeLab/Projects</a></li>
-								<li><a href="#work">Work</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#contact">Contact</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0f16'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='52' font-weight='700' fill='%2334e3c2' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
 
-				<!-- Main -->
-					<div id="main">
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand">JTS<span class="blink">//</span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <!-- To show these, remove `hidden` from the matching <section> below and re-add the links here:
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#certs">Certifications</a></li> -->
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
-						<!-- Intro -->
-							<article id="intro">
-                            <h2 class="major">Homelab/Personal Projects</h2>
-                            <span class="image main"><img src="images/homelab_ad_network_diagram.jpg" alt="Home Lab Active Directory Network Diagram" /></span>
-                            <h3>Building My Home Lab: A Dive into Active Directory and Network Services</h3>
-                            <span class="image main"><img src="images/homelab.jpg" alt="Description of Homelab setup" /></span>
-                            <p>Establish a fully functional Active Directory environment: I was able to configure a domain controller (Server 2019) and populated it with over 150 user accounts and 10 IT administrator accounts. Along side this deployment, I was able to also configure a Windows File server with a mapped drive using group policy to the Windows laptop.</p>
-                            <p>This entire process was incredibly rewarding. My initial exposure to Active Directory environments was limited because my first IT support role involved an already fully configured and set up multi-domain environment</p>
+  <!-- ===================== HERO ===================== -->
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-copy reveal">
+        <span class="hero-status"><span class="dot"></span> Open to security engineering roles</span>
+        <h1>James Tyler Short</h1>
+        <p class="role">Cybersecurity Professional&nbsp;·&nbsp;Detection &amp; Network Security</p>
+        <p class="lead">
+          I build and break things to understand how to defend them — running a full
+          security-operations homelab, deploying SIEM/XDR tooling, and writing my own
+          open-source threat console along the way.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+            View Projects
+          </a>
+          <a href="https://github.com/jtshor14899" target="_blank" rel="noopener" class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.39 1.24-3.23-.13-.31-.54-1.53.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.18.77.84 1.23 1.92 1.23 3.23 0 4.62-2.81 5.64-5.49 5.94.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.58A12.01 12.01 0 0024 12.5C24 5.87 18.63.5 12 .5z"/></svg>
+            GitHub
+          </a>
+        </div>
+        <div class="hero-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 1114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> North Georgia, USA</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l6-6-6-6M12 19h8"/></svg> Open-source maintainer</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-4z"/></svg> Blue-team focused</span>
+        </div>
+      </div>
 
-                            <hr />
+      <div class="hero-visual reveal">
+        <span class="glow"></span>
+        <figure class="hero-frame" style="margin:0">
+          <div class="frame-bar"><i></i><i></i><i></i><span class="frame-title">threat-dash — live threat map</span></div>
+          <img src="images/td-hero.png" alt="threat-dash dashboard showing a 3D globe of live attack traffic" loading="eager" />
+        </figure>
+      </div>
+    </div>
+  </header>
 
-                            <h3> DHCP Management </h3>
-                            <span class="image main"><img src="images/DHCP.png" alt="Description of your new image" /></span>
-                            <p>Configured DHCP on the domain controller (dc.mydomain.com) with an IPv4 scope of 172.16.0.100-200 on the 172.16.0.0/24 network. Set scope options for default gateway, DNS server, and domain name. Created a DHCP reservation for the file server (172.16.0.100) to ensure consistent IP assignment for domain-joined services relying on SMB and DNS resolution."</p>
-                            <hr />
+  <main>
+    <!-- ===================== ABOUT ===================== -->
+    <section class="section" id="about">
+      <div class="container">
+        <span class="eyebrow">01 — About</span>
+        <h2 class="section-title">Hands-on, defense-minded, always building</h2>
+        <div class="about-grid">
+          <div class="about-body reveal">
+            <p>
+              I'm a cybersecurity professional based in North Georgia with a hands-on,
+              build-it-to-understand-it approach to security. My path started in IT support
+              and grew into a deep interest in <strong>detection engineering, network
+              security, and security operations</strong>.
+            </p>
+            <p>
+              Rather than learning from slides, I run a production-grade homelab: a virtualized
+              cluster of Linux and Windows systems where I stand up the same tooling used in real
+              SOCs — <strong>SIEM/XDR, firewalls, identity services, and threat intelligence</strong> —
+              then instrument, attack, and defend them. When the tools I wanted didn't exist, I
+              wrote my own: <strong>threat-dash</strong>, an open-source security console.
+            </p>
+            <p>
+              I care about the fundamentals — Active Directory and Group Policy, network
+              segmentation, log analysis, and mapping activity to <strong>MITRE ATT&amp;CK</strong> —
+              and about turning messy telemetry into something a human can actually act on.
+            </p>
+          </div>
+          <aside class="facts reveal">
+            <h3>// Quick facts</h3>
+            <div class="fact">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 1114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span><span class="k">Location</span><span class="v">North Georgia, USA</span></span>
+            </div>
+            <div class="fact">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-4z"/></svg>
+              <span><span class="k">Focus</span><span class="v">Detection · Network Security · SecOps</span></span>
+            </div>
+            <div class="fact">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>
+              <span><span class="k">Currently</span><span class="v">Running a SecOps homelab &amp; shipping threat-dash</span></span>
+            </div>
+            <div class="fact">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.39 1.24-3.23-.13-.31-.54-1.53.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.18.77.84 1.23 1.92 1.23 3.23 0 4.62-2.81 5.64-5.49 5.94.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.58A12.01 12.01 0 0024 12.5C24 5.87 18.63.5 12 .5z"/></svg>
+              <span><span class="k">GitHub</span><span class="v"><a href="https://github.com/jtshor14899" target="_blank" rel="noopener">@jtshor14899</a></span></span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
 
-                            <h3>Active Directory Users and Computers</h3>
-                            <span class="image main"><img src="images/File-Permissions.png" alt="Description of your new image" /></span>
-                            <p>Organized the Active Directory structure within mydomain.com using custom OUs to separate administrative accounts (_ADMINS), standard user accounts (_USERS), and resource-related objects (File Access, Security Groups). Created role-based security groups under the Security Groups → Shared File Access OU, including sf-tech, sf-HR, sf-accounts, and It-Admins Users. These security groups are used to control NTFS permissions on the file server shares and to drive item-level targeting in Group Policy Preferences for mapped drive assignments. Nested groups (HR users, mydomain admins) were configured under Shared File Access to simplify permission management — users are added to the nested group, which inherits access through the parent security group.</p>
-							<span class="image main"><img src="images/File-Share.png" /></span>
-                            <p>Verified successful Group Policy application on a domain-joined Windows client. The mapped network drive 'Shares (J:)' appears under Network locations, confirming the GPO-driven drive mapping is functioning correctly. The J: drive points to the file server share with 0.99 GB of allocated storage (0.98 GB free), accessible based on the user's security group membership in Active Directory. This validates the end-to-end workflow: user authenticates to the domain → Group Policy processes at logon → drive map is applied based on security group targeting → user has seamless access to their department's shared files without manual configuration.</p>
-                        </article>
+    <!-- ===================== SKILLS ===================== -->
+    <section class="section" id="skills">
+      <div class="container">
+        <span class="eyebrow">02 — Skills</span>
+        <h2 class="section-title">What I work with</h2>
+        <p class="section-lead">Tools and disciplines I've used hands-on across my homelab and projects.</p>
+        <div class="skills-grid">
 
-						<!-- Work -->
-							<article id="work">
-								<h2 class="major">Work</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>Cyber Security professional based out of North Georgia.</p>
-								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-							</article>
+          <div class="skill-card reveal">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13h4l2 5 4-12 2 7h6"/></svg></div>
+            <h3>Detection &amp; SIEM</h3>
+            <div class="tags">
+              <span class="tag">Wazuh SIEM/XDR</span><span class="tag">Log analysis</span>
+              <span class="tag">MITRE ATT&amp;CK</span><span class="tag">Threat intel</span>
+              <span class="tag">IOC enrichment</span><span class="tag">Alert triage</span>
+            </div>
+          </div>
 
-						<!-- About -->
-							<article id="about">
-								<h2 class="major">About</h2>
-								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
-							</article>
+          <div class="skill-card reveal">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg></div>
+            <h3>Network Security</h3>
+            <div class="tags">
+              <span class="tag">pfSense / firewalls</span><span class="tag">Segmentation</span>
+              <span class="tag">Cloudflare WAF</span><span class="tag">DNS / DHCP</span>
+              <span class="tag">GeoIP threat mapping</span><span class="tag">Reverse proxy</span>
+            </div>
+          </div>
 
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>
-								<ul class="icons">
-									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</article>
+          <div class="skill-card reveal">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+            <h3>Identity &amp; Directory</h3>
+            <div class="tags">
+              <span class="tag">Active Directory</span><span class="tag">Group Policy</span>
+              <span class="tag">RBAC</span><span class="tag">NTFS permissions</span>
+              <span class="tag">Windows Server</span>
+            </div>
+          </div>
 
-						<!-- Elements -->
-							<article id="elements">
-								<h2 class="major">Elements</h2>
+          <div class="skill-card reveal">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+            <h3>Cloud &amp; Infrastructure</h3>
+            <div class="tags">
+              <span class="tag">Docker</span><span class="tag">Proxmox</span>
+              <span class="tag">Linux admin</span><span class="tag">Caddy</span>
+              <span class="tag">Self-hosting</span><span class="tag">Cloudflare</span>
+            </div>
+          </div>
 
-								<section>
-									<h3 class="major">Text</h3>
-									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-									<hr />
-									<h2>Heading Level 2</h2>
-									<h3>Heading Level 3</h3>
-									<h4>Heading Level 4</h4>
-									<h5>Heading Level 5</h5>
-									<h6>Heading Level 6</h6>
-									<hr />
-									<h4>Blockquote</h4>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-									<h4>Preformatted</h4>
-									<pre><code>i = 0;
+          <div class="skill-card reveal">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+            <h3>Programming &amp; Automation</h3>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">REST APIs</span>
+              <span class="tag">Bash</span><span class="tag">Git / GitHub</span>
+              <span class="tag">SQLite</span>
+            </div>
+          </div>
 
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
+          <div class="skill-card reveal">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <h3>Security Operations</h3>
+            <div class="tags">
+              <span class="tag">Monitoring &amp; alerting</span><span class="tag">Vuln management</span>
+              <span class="tag">File integrity (FIM)</span><span class="tag">Incident triage</span>
+              <span class="tag">Hardening</span>
+            </div>
+          </div>
 
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-								</section>
+        </div>
+      </div>
+    </section>
 
-								<section>
-									<h3 class="major">Lists</h3>
+    <!-- ===================== PROJECTS ===================== -->
+    <section class="section" id="projects">
+      <div class="container">
+        <span class="eyebrow">03 — Projects</span>
+        <h2 class="section-title">Selected work</h2>
+        <p class="section-lead">Real systems I've designed, built, and documented — not coursework.</p>
 
-									<h4>Unordered</h4>
-									<ul>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
+        <!-- Featured: threat-dash -->
+        <article class="project project-featured reveal">
+          <div class="project-head">
+            <div class="pinfo">
+              <div class="badge-row">
+                <span class="badge badge-oss">Open source · MIT</span>
+                <span class="badge badge-live">Maintained</span>
+              </div>
+              <h3>threat-dash</h3>
+              <p class="ptag">// self-hosted security console for the homelab era</p>
+              <p>
+                A single-container security dashboard that shows who's attacking you, where your
+                containers are reaching out, and lets you shut bad actors down at the edge — all in
+                one pane of glass. Built from scratch with the Python standard library and just two
+                dependencies.
+              </p>
+              <ul class="feat">
+                <li>Live 3D threat map (globe.gl) plotting attack sources in real time</li>
+                <li>Cloudflare analytics: traffic, WAF blocks, top countries &amp; offending IPs</li>
+                <li>pfSense + Wazuh integrations for firewall and endpoint/SIEM visibility</li>
+                <li>Outbound intel &amp; IOC enrichment — see where workloads phone home</li>
+                <li>One-click edge blocking; pluggable backend client architecture</li>
+              </ul>
+              <div class="project-actions">
+                <a href="https://github.com/jtshor14899/threat-dash" target="_blank" rel="noopener" class="btn btn-primary">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.39 1.24-3.23-.13-.31-.54-1.53.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.18.77.84 1.23 1.92 1.23 3.23 0 4.62-2.81 5.64-5.49 5.94.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.58A12.01 12.01 0 0024 12.5C24 5.87 18.63.5 12 .5z"/></svg>
+                  View on GitHub
+                </a>
+              </div>
+              <div class="project-stack">
+                <span class="tag">Python</span><span class="tag">Docker</span><span class="tag">SQLite</span>
+                <span class="tag">globe.gl</span><span class="tag">Cloudflare API</span>
+                <span class="tag">Wazuh API</span><span class="tag">REST</span>
+              </div>
+            </div>
+            <div class="pshot">
+              <img src="images/td-hero.png" alt="threat-dash live threat map" loading="lazy" data-lightbox />
+            </div>
+          </div>
+          <div class="gallery">
+            <figure><img src="images/td-overview.png" alt="threat-dash overview tab" loading="lazy" data-lightbox /><figcaption>Overview &amp; KPIs</figcaption></figure>
+            <figure><img src="images/td-blocks.png" alt="threat-dash blocked IPs" loading="lazy" data-lightbox /><figcaption>Edge blocks</figcaption></figure>
+            <figure><img src="images/td-endpoints.png" alt="threat-dash endpoint detail from Wazuh" loading="lazy" data-lightbox /><figcaption>Endpoint detail (Wazuh)</figcaption></figure>
+          </div>
+        </article>
 
-									<h4>Alternate</h4>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
+        <!-- AD homelab -->
+        <article class="project reveal">
+          <div class="project-head">
+            <div class="pinfo">
+              <div class="badge-row">
+                <span class="badge">Lab build</span>
+              </div>
+              <h3>Active Directory &amp; Windows Services Lab</h3>
+              <p class="ptag">// domain controller, identity, and file services from the ground up</p>
+              <p>
+                A fully functional Windows domain environment built to internalize enterprise
+                identity and access management — designed, deployed, and validated end-to-end.
+              </p>
+              <ul class="feat">
+                <li>Windows Server 2019 domain controller with 150+ users and a tiered admin model</li>
+                <li>OU design separating admins, users, and resources; role-based security groups with nesting</li>
+                <li>NTFS permissions driven by group membership; GPO mapped drives via item-level targeting</li>
+                <li>DHCP scope (172.16.0.0/24) with reservations and scope options for gateway/DNS/domain</li>
+                <li>Verified the full chain: authenticate → GPO processing → drive map → scoped file access</li>
+              </ul>
+              <div class="project-stack">
+                <span class="tag">Windows Server 2019</span><span class="tag">Active Directory</span>
+                <span class="tag">Group Policy</span><span class="tag">DHCP / DNS</span>
+                <span class="tag">NTFS / RBAC</span>
+              </div>
+            </div>
+            <div class="pshot">
+              <img src="images/homelab_ad_network_diagram.jpg" alt="Active Directory homelab network diagram" loading="lazy" data-lightbox />
+            </div>
+          </div>
+          <div class="gallery">
+            <figure><img src="images/DHCP.png" alt="DHCP scope configuration" loading="lazy" data-lightbox /><figcaption>DHCP scope</figcaption></figure>
+            <figure><img src="images/File-Permissions.png" alt="Active Directory OU and security group structure" loading="lazy" data-lightbox /><figcaption>OU &amp; groups</figcaption></figure>
+            <figure><img src="images/File-Share.png" alt="GPO-mapped network drive on a domain client" loading="lazy" data-lightbox /><figcaption>GPO drive map</figcaption></figure>
+            <figure><img src="images/homelab.jpg" alt="Homelab hardware" loading="lazy" data-lightbox /><figcaption>The rack</figcaption></figure>
+          </div>
+        </article>
 
-									<h4>Ordered</h4>
-									<ol>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis viverra.</li>
-										<li>Felis enim feugiat.</li>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis lorem.</li>
-										<li>Felis enim et feugiat.</li>
-									</ol>
-									<h4>Icons</h4>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-									</ul>
+        <!-- Homelab SecOps stack (compact) -->
+        <article class="project reveal">
+          <div class="project-head">
+            <div class="pinfo">
+              <div class="badge-row"><span class="badge">Ongoing</span></div>
+              <h3>Security Operations Homelab</h3>
+              <p class="ptag">// a personal SOC lab for detection, monitoring, and response</p>
+              <p>
+                The platform behind everything else: a virtualized cluster running the security
+                stack I learn and experiment on. It's where threat-dash gets its real data.
+              </p>
+              <ul class="feat">
+                <li>Proxmox virtualization cluster hosting Linux and Windows workloads</li>
+                <li>Wazuh SIEM/XDR deployed for endpoint telemetry, FIM, and vulnerability detection</li>
+                <li>Docker Compose service stack behind a Caddy reverse proxy with TLS</li>
+                <li>Cloudflare-fronted services and health-check alerting to a phone via push</li>
+              </ul>
+              <div class="project-stack">
+                <span class="tag">Proxmox</span><span class="tag">Wazuh</span><span class="tag">Docker</span>
+                <span class="tag">Caddy</span><span class="tag">Cloudflare</span><span class="tag">Linux</span>
+              </div>
+            </div>
+            <div class="pshot">
+              <img src="images/td-overview.png" alt="Security operations dashboard overview" loading="lazy" data-lightbox />
+            </div>
+          </div>
+        </article>
 
-									<h4>Actions</h4>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</section>
+      </div>
+    </section>
 
-								<section>
-									<h3 class="major">Table</h3>
-									<h4>Default</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
+    <!-- ===================== EXPERIENCE ===================== -->
+    <!-- HIDDEN until real roles are added. Remove the `hidden` attribute below
+         (and re-add the nav link) once the placeholders are filled in. -->
+    <section class="section" id="experience" hidden>
+      <div class="container">
+        <span class="eyebrow">04 — Experience</span>
+        <h2 class="section-title">Career timeline</h2>
+        <p class="section-lead">Professional history. <strong>(Placeholders below — replace with your real roles, employers, and dates.)</strong></p>
+        <div class="timeline">
 
-									<h4>Alternate</h4>
-									<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-								</section>
+          <!-- EDIT: replace with your current/most recent role -->
+          <div class="tl-item reveal">
+            <span class="placeholder-note">EDIT ME</span>
+            <div class="tl-when">20XX — Present</div>
+            <h3 class="tl-role">Your Current Role</h3>
+            <div class="tl-org">Company Name · City, ST</div>
+            <p>One or two lines on your responsibilities and a measurable win (e.g., "Triaged X alerts/day, reduced false positives by Y%").</p>
+          </div>
 
-								<section>
-									<h3 class="major">Buttons</h3>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Primary</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button">Default</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-									</ul>
-									<ul class="actions">
-										<li><span class="button primary disabled">Disabled</span></li>
-										<li><span class="button disabled">Disabled</span></li>
-									</ul>
-								</section>
+          <!-- EDIT: previous role -->
+          <div class="tl-item reveal">
+            <span class="placeholder-note">EDIT ME</span>
+            <div class="tl-when">20XX — 20XX</div>
+            <h3 class="tl-role">Previous Role</h3>
+            <div class="tl-org">Company Name · City, ST</div>
+            <p>What you owned and the impact you had. Quantify wherever possible.</p>
+          </div>
 
-								<section>
-									<h3 class="major">Form</h3>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<label for="demo-name">Name</label>
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
-											</div>
-											<div class="field half">
-												<label for="demo-email">Email</label>
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
-											</div>
-											<div class="field">
-												<label for="demo-category">Category</label>
-												<select name="demo-category" id="demo-category">
-													<option value="">-</option>
-													<option value="1">Manufacturing</option>
-													<option value="1">Shipping</option>
-													<option value="1">Administration</option>
-													<option value="1">Human Resources</option>
-												</select>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-												<label for="demo-priority-low">Low</label>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-high" name="demo-priority">
-												<label for="demo-priority-high">High</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-copy" name="demo-copy">
-												<label for="demo-copy">Email me a copy</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-human" name="demo-human" checked>
-												<label for="demo-human">Not a robot</label>
-											</div>
-											<div class="field">
-												<label for="demo-message">Message</label>
-												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>
+          <!-- This one is grounded in your homelab notes — confirm/adjust -->
+          <div class="tl-item reveal">
+            <span class="placeholder-note">EDIT ME</span>
+            <div class="tl-when">20XX — 20XX</div>
+            <h3 class="tl-role">IT Support</h3>
+            <div class="tl-org">Company Name · City, ST</div>
+            <p>Supported a multi-domain Active Directory environment — first hands-on exposure to enterprise identity, endpoints, and ticketed support that sparked the move into security.</p>
+          </div>
 
-							</article>
+        </div>
+      </div>
+    </section>
 
-					</div>
+    <!-- ===================== CERTIFICATIONS ===================== -->
+    <!-- HIDDEN until real certs are added. Remove the `hidden` attribute below
+         (and re-add the nav link) once you've listed the certs you hold. -->
+    <section class="section" id="certs" hidden>
+      <div class="container">
+        <span class="eyebrow">05 — Certifications</span>
+        <h2 class="section-title">Certifications &amp; learning</h2>
+        <p class="section-lead">Credentials and training. <strong>(Placeholders — delete any you don't hold and add the ones you do.)</strong></p>
+        <div class="cert-grid">
 
-				<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright">&copy; James Tyler Short. Design: <a href="">HTML5 UP</a>.</p>
-					</footer>
+          <div class="cert is-placeholder reveal">
+            <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <div><div class="cname">CompTIA Security+</div><div class="cmeta">EDIT — year / status</div></div>
+          </div>
+          <div class="cert is-placeholder reveal">
+            <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <div><div class="cname">CompTIA Network+</div><div class="cmeta">EDIT — year / status</div></div>
+          </div>
+          <div class="cert is-placeholder reveal">
+            <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <div><div class="cname">Add your cert</div><div class="cmeta">EDIT — issuer / year</div></div>
+          </div>
 
-			</div>
+        </div>
+      </div>
+    </section>
 
-		<!-- BG -->
-			<div id="bg"></div>
+    <!-- ===================== CONTACT ===================== -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <span class="eyebrow" style="justify-content:center">04 — Contact</span>
+        <h2 class="section-title">Let's talk security</h2>
+        <p class="section-lead">
+          Open to security engineering, SOC analyst, and detection roles. The fastest way to
+          reach me is email — I'll get back to you quickly.
+        </p>
+        <div class="contact-actions">
+          <a href="mailto:tyler.short44@gmail.com" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Email me
+          </a>
+          <!-- Once you add a résumé PDF to the repo, restore this button:
+          <a href="resume.pdf" class="btn btn-ghost" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/></svg>
+            Résumé (PDF)
+          </a> -->
+        </div>
+        <div class="socials">
+          <a href="https://github.com/jtshor14899" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.39 1.24-3.23-.13-.31-.54-1.53.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.18.77.84 1.23 1.92 1.23 3.23 0 4.62-2.81 5.64-5.49 5.94.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.58A12.01 12.01 0 0024 12.5C24 5.87 18.63.5 12 .5z"/></svg>
+          </a>
+          <!-- Once you have your LinkedIn URL, restore this icon (replace the href):
+          <a href="https://www.linkedin.com/in/YOUR-PROFILE" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 110-4.14 2.07 2.07 0 010 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          </a> -->
+          <a href="mailto:tyler.short44@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="brand">JTS<span class="blink">//</span></span>
+      <span>&copy; <span id="year">2026</span> James Tyler Short · Built &amp; hosted on GitHub Pages</span>
+    </div>
+  </footer>
 
-	</body>
+  <!-- lightbox -->
+  <div class="lightbox" id="lightbox"><button class="lb-close" aria-label="Close">&times;</button><img src="" alt="" id="lbImg" /></div>
+
+  <script src="assets/js/site.js"></script>
+</body>
 </html>
