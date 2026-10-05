@@ -255,6 +255,47 @@
           </div>
         </article>
 
+        <!-- Ops Console: homelab network visibility -->
+        <article class="project project-featured reveal">
+          <div class="project-head">
+            <div class="pinfo">
+              <div class="badge-row">
+                <span class="badge badge-live">In daily use</span>
+                <span class="badge">Private repo</span>
+              </div>
+              <h3>Ops Console &amp; Network Visibility</h3>
+              <p class="ptag">// a phone-first command center for a 40-container homelab</p>
+              <p>
+                One static page, installed on the iPhone home screen, that answers "is everything up?"
+                and "what is every device on my network doing?" without a login prompt for the safe
+                parts and a shared token for the sensitive ones. Zero frameworks: vanilla JS, one JSON
+                file of host telemetry, and a 250-line Python API.
+              </p>
+              <ul class="feat">
+                <li><b>Console tab</b> — live up/down for ~30 reverse-proxied services, host pings, disk/memory/VPN tiles, Alertmanager alerts, and one-tap DNS unblocking across two AdGuard Home instances</li>
+                <li><b>Network tab</b> — per-device top domains (1h to 7d) from both DNS query logs, a device inventory merged from DHCP leases + ARP + ping + DNS adoption, AdGuard health with upstream latency, every Caddy route, every Docker network and published port, link throughput</li>
+                <li>Background collector pages the AdGuard API incrementally into an hourly SQLite aggregate (7-day retention); a full week backfills in ~20 s</li>
+                <li>Threat model built in: the API is reachable only from the LAN and the mesh VPN, per-device browsing history needs a token, and the recently-blocked feed is aggregated so it never names a device</li>
+                <li>Encrypted offsite tier for the nightly config backup: rclone crypt to Google Drive with a <code>drive.file</code>-scoped token, secrets kept out of the backup set itself</li>
+              </ul>
+              <div class="project-stack">
+                <span class="tag">Vanilla JS</span><span class="tag">Python stdlib</span><span class="tag">SQLite</span>
+                <span class="tag">AdGuard Home API</span><span class="tag">Caddy</span><span class="tag">Docker</span>
+                <span class="tag">NetBird</span><span class="tag">rclone crypt</span><span class="tag">PWA</span>
+              </div>
+            </div>
+            <div class="pshot">
+              <img src="images/ops-console-network-desktop.png" alt="Ops Console Network tab: DNS traffic per device, device inventory, AdGuard health" loading="lazy" data-lightbox />
+            </div>
+          </div>
+          <div class="gallery">
+            <figure><img src="images/ops-console-console-phone.png" alt="Ops Console on a phone: service tiles and health readout" loading="lazy" data-lightbox /><figcaption>Console tab (phone)</figcaption></figure>
+            <figure><img src="images/ops-console-network-phone.png" alt="Network tab on a phone: per-device DNS traffic cards" loading="lazy" data-lightbox /><figcaption>Network tab (phone)</figcaption></figure>
+            <figure><img src="images/ops-console-console-desktop.png" alt="Ops Console on desktop" loading="lazy" data-lightbox /><figcaption>Console tab (desktop)</figcaption></figure>
+          </div>
+          <p class="section-lead" style="padding:0 38px 30px;margin:0;font-size:.82rem">Screenshots are rendered from a demo build with synthetic data: hostnames, addresses and domains shown are not the real network.</p>
+        </article>
+
         <!-- AD homelab -->
         <article class="project reveal">
           <div class="project-head">
@@ -309,6 +350,7 @@
                 <li>Wazuh SIEM/XDR deployed for endpoint telemetry, FIM, and vulnerability detection</li>
                 <li>Docker Compose service stack behind a Caddy reverse proxy with TLS</li>
                 <li>Cloudflare-fronted services and health-check alerting to a phone via push</li>
+                <li>Two-tier DNS (AdGuard Home as LAN DHCP + filtering) with the Ops Console above for per-device visibility</li>
               </ul>
               <div class="project-stack">
                 <span class="tag">Proxmox</span><span class="tag">Wazuh</span><span class="tag">Docker</span>
