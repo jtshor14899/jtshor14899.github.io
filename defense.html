@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Defensive Security — GOAD Blue Team Program · James Tyler Short</title>
+  <meta name="description" content="A defensive cyber security program run against the GOAD (Game of Active Directory) range: telemetry, detection engineering mapped to MITRE ATT&CK, hardening, and purple-team validation, with a running event log." />
+  <meta name="author" content="James Tyler Short" />
+  <meta name="theme-color" content="#0a0f16" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Defensive Security — GOAD Blue Team Program" />
+  <meta property="og:description" content="Detection engineering, hardening and purple-team validation on a three-domain Active Directory range." />
+  <meta property="og:url" content="https://jtshor14899.github.io/defense.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0f16'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='52' font-weight='700' fill='%2334e3c2' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">JTS<span class="blink">//</span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="defense.html" class="active">Defense</a></li>
+        <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-hero" id="top">
+    <div class="container">
+      <span class="eyebrow">Defensive cyber security</span>
+      <h1>GOAD Blue Team Program</h1>
+      <p class="role" style="font-family:var(--mono);color:var(--accent);margin:0 0 18px">// instrument, detect, harden, validate — on a deliberately broken AD forest</p>
+      <p class="lead">
+        <a href="https://orange-cyberdefense.github.io/GOAD/" target="_blank" rel="noopener">GOAD (Game of Active Directory)</a>
+        is an intentionally vulnerable Active Directory range from Orange Cyberdefense: five Windows servers,
+        three domains, two forests, and a catalogue of real-world misconfigurations. Most people use it to
+        practise attacks. This page tracks the opposite: everything I plan and do to <strong>see</strong>
+        each attack, <strong>stop</strong> it, and prove both with evidence.
+      </p>
+      <div class="hero-actions">
+        <a href="#plan" class="btn btn-primary">The plan</a>
+        <a href="#coverage" class="btn btn-ghost">Coverage matrix</a>
+        <a href="#log" class="btn btn-ghost">Event log</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="n">5</div><div class="l">Windows hosts</div></div>
+        <div class="stat"><div class="n">3</div><div class="l">Domains · 2 forests</div></div>
+        <div class="stat"><div class="n" id="statPaths">–</div><div class="l">Attack paths tracked</div></div>
+        <div class="stat"><div class="n accent" id="statValidated">–</div><div class="l">Detections validated</div></div>
+        <div class="stat"><div class="n accent" id="statHardened">–</div><div class="l">Paths hardened</div></div>
+        <div class="stat"><div class="n" id="logCount">–</div><div class="l">Logged events</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== THE RANGE ===================== -->
+    <section class="section" id="range">
+      <div class="container">
+        <span class="eyebrow">01 — The range</span>
+        <h2 class="section-title">What I'm defending</h2>
+        <p class="section-lead">The stock GOAD layout, deployed on my Proxmox cluster in an isolated lab VLAN, with a blue-team layer on top.</p>
+        <div class="range-grid">
+          <div class="diagram reveal">
+            <svg viewBox="0 0 760 450" role="img" aria-label="GOAD range: two forests, three domains, five hosts, with Wazuh and an attacker box on the lab VLAN">
+              <defs>
+                <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="#647386"/></marker>
+              </defs>
+              <!-- forest: sevenkingdoms.local -->
+              <rect x="14" y="14" width="410" height="300" rx="12" fill="rgba(78,160,255,.05)" stroke="#2d3f57"/>
+              <text x="28" y="36" font-size="11" fill="#4ea0ff" letter-spacing="1.5">FOREST · SEVENKINGDOMS.LOCAL</text>
+              <rect x="30" y="52" width="180" height="70" rx="9" fill="#15202f" stroke="#2d3f57"/>
+              <text x="42" y="74" font-size="13" fill="#e8eef6" font-weight="700">kingslanding</text>
+              <text x="42" y="92" font-size="10" fill="#9fb0c3">DC01 · root domain · Server 2019</text>
+              <text x="42" y="108" font-size="10" fill="#647386">Defender on</text>
+              <!-- child domain -->
+              <rect x="30" y="150" width="378" height="150" rx="10" fill="rgba(52,227,194,.04)" stroke="#223145" stroke-dasharray="4 3"/>
+              <text x="44" y="170" font-size="10.5" fill="#34e3c2" letter-spacing="1.2">CHILD · NORTH.SEVENKINGDOMS.LOCAL</text>
+              <rect x="44" y="184" width="170" height="96" rx="9" fill="#15202f" stroke="#2d3f57"/>
+              <text x="56" y="206" font-size="13" fill="#e8eef6" font-weight="700">winterfell</text>
+              <text x="56" y="224" font-size="10" fill="#9fb0c3">DC02 · child DC · Server 2019</text>
+              <text x="56" y="240" font-size="10" fill="#647386">Defender on</text>
+              <rect x="228" y="184" width="166" height="96" rx="9" fill="#15202f" stroke="#f87171"/>
+              <text x="240" y="206" font-size="13" fill="#e8eef6" font-weight="700">castelblack</text>
+              <text x="240" y="224" font-size="10" fill="#9fb0c3">SRV02 · IIS · MSSQL · SMB</text>
+              <text x="240" y="240" font-size="10" fill="#f87171">Defender OFF · signing off</text>
+              <text x="240" y="256" font-size="10" fill="#647386">Server 2019</text>
+              <!-- parent/child trust -->
+              <path d="M120 122 V184" stroke="#647386" stroke-width="1.5" marker-end="url(#arr)" marker-start="url(#arr)"/>
+              <text x="128" y="156" font-size="9.5" fill="#647386">parent–child trust</text>
+
+              <!-- forest: essos.local -->
+              <rect x="446" y="14" width="300" height="300" rx="12" fill="rgba(251,191,36,.04)" stroke="#2d3f57"/>
+              <text x="460" y="36" font-size="11" fill="#fbbf24" letter-spacing="1.5">FOREST · ESSOS.LOCAL</text>
+              <rect x="462" y="52" width="268" height="70" rx="9" fill="#15202f" stroke="#2d3f57"/>
+              <text x="474" y="74" font-size="13" fill="#e8eef6" font-weight="700">meereen</text>
+              <text x="474" y="92" font-size="10" fill="#9fb0c3">DC03 · root domain · Server 2016</text>
+              <text x="474" y="108" font-size="10" fill="#647386">Defender on</text>
+              <rect x="462" y="184" width="268" height="96" rx="9" fill="#15202f" stroke="#fbbf24"/>
+              <text x="474" y="206" font-size="13" fill="#e8eef6" font-weight="700">braavos</text>
+              <text x="474" y="224" font-size="10" fill="#9fb0c3">SRV03 · MSSQL · SMB · ADCS CA</text>
+              <text x="474" y="240" font-size="10" fill="#fbbf24">signing off · ESC templates</text>
+              <text x="474" y="256" font-size="10" fill="#647386">Server 2016</text>
+              <path d="M596 122 V184" stroke="#647386" stroke-width="1.5" marker-end="url(#arr)"/>
+              <!-- forest trust -->
+              <path d="M210 87 H462" stroke="#9fb0c3" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr)" marker-start="url(#arr)"/>
+              <text x="276" y="80" font-size="9.5" fill="#9fb0c3">forest trust</text>
+              <!-- MSSQL trusted link -->
+              <path d="M394 232 H462" stroke="#f87171" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arr)"/>
+              <text x="398" y="224" font-size="9" fill="#f87171">MSSQL link</text>
+
+              <!-- lab VLAN bar -->
+              <line x1="14" y1="346" x2="746" y2="346" stroke="#2d3f57" stroke-width="2"/>
+              <text x="14" y="338" font-size="10" fill="#647386" letter-spacing="1.2">ISOLATED LAB VLAN · NO ROUTE TO THE HOME LAN</text>
+              <!-- blue team -->
+              <rect x="14" y="362" width="236" height="74" rx="9" fill="rgba(52,227,194,.08)" stroke="#34e3c2"/>
+              <text x="26" y="384" font-size="12" fill="#34e3c2" font-weight="700">BLUE · Wazuh manager</text>
+              <text x="26" y="402" font-size="10" fill="#9fb0c3">agents + Sysmon on all 5 hosts</text>
+              <text x="26" y="418" font-size="10" fill="#9fb0c3">audit policy · SACLs · FIM on SYSVOL</text>
+              <rect x="268" y="362" width="236" height="74" rx="9" fill="rgba(78,160,255,.08)" stroke="#4ea0ff"/>
+              <text x="280" y="384" font-size="12" fill="#4ea0ff" font-weight="700">BASELINE · BloodHound</text>
+              <text x="280" y="402" font-size="10" fill="#9fb0c3">graph of every path before/after</text>
+              <text x="280" y="418" font-size="10" fill="#9fb0c3">private inventory, never published</text>
+              <rect x="522" y="362" width="224" height="74" rx="9" fill="rgba(248,113,113,.08)" stroke="#f87171"/>
+              <text x="534" y="384" font-size="12" fill="#f87171" font-weight="700">RED · attacker box</text>
+              <text x="534" y="402" font-size="10" fill="#9fb0c3">GOAD write-ups, one path at a time</text>
+              <text x="534" y="418" font-size="10" fill="#9fb0c3">used only to validate detections</text>
+            </svg>
+            <p class="cap">Layout per the GOAD docs. Hosts outlined in red or amber ship with the misconfigurations the matrix below tracks.</p>
+          </div>
+          <div class="reveal">
+            <table class="host-table">
+              <thead><tr><th>Host</th><th>Role</th><th>Why it matters to me</th></tr></thead>
+              <tbody>
+                <tr><td>kingslanding</td><td>Root DC, sevenkingdoms.local</td><td>Forest root. Where the trust and tier-0 detections live.</td></tr>
+                <tr><td>winterfell</td><td>Child DC, north.sevenkingdoms.local</td><td>Most GOAD user-level paths start here: roasting, spraying, ACLs, GPO.</td></tr>
+                <tr><td>castelblack</td><td>Member server: IIS, MSSQL, SMB</td><td>Defender off, SMB signing off, MSSQL impersonation. The noisiest box.</td></tr>
+                <tr><td>meereen</td><td>Root DC, essos.local</td><td>Second forest. Cross-forest trust abuse and LAPS paths.</td></tr>
+                <tr><td>braavos</td><td>Member server: MSSQL, SMB, ADCS</td><td>Trusted-link target and the certificate authority with ESC-class templates.</td></tr>
+              </tbody>
+            </table>
+            <h3 style="font-size:1rem;margin:26px 0 8px">Ground rules</h3>
+            <ul class="feat" style="margin-top:4px">
+              <li>The range lives on its own VLAN with no route to anything real. Attacks never leave it.</li>
+              <li>Stock GOAD build, no custom weaknesses, so every result maps back to the public write-ups.</li>
+              <li>A detection counts as <em>validated</em> only after the attack was run and the alert fired, with the time-to-detect recorded.</li>
+              <li>A path counts as <em>hardened</em> only after the control is applied and the same attack is re-run and fails.</li>
+              <li>Rules, configs and the BloodHound inventory stay in the private homelab repo. This page carries results and method only.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PLAN ===================== -->
+    <section class="section" id="plan">
+      <div class="container">
+        <span class="eyebrow">02 — The plan</span>
+        <h2 class="section-title">Seven phases, each with an exit test</h2>
+        <p class="section-lead">Checked boxes are done. The matrix and the log below are the proof.</p>
+        <div class="phases">
+
+          <div class="phase reveal">
+            <div class="ph-head"><span class="ph-num">PHASE 0</span><span class="st st-next">next</span></div>
+            <h3>Build the range</h3>
+            <p>Deploy stock GOAD with the Proxmox provider (Packer templates, Terraform, Ansible) into a dedicated lab VLAN.</p>
+            <ul>
+              <li class="done">Choose provider and lab layout (Proxmox · GOAD full)</li>
+              <li>Provisioning VM with the GOAD toolchain</li>
+              <li>Lab VLAN with no route to the home LAN; management access only over the mesh VPN</li>
+              <li>Snapshot every VM as the clean baseline</li>
+              <li>Calendar the 180-day Windows evaluation licence rebuild</li>
+            </ul>
+            <div class="exit"><b>exit:</b> all five hosts resolve, both forests authenticate, <code>goad check</code> passes.</div>
+          </div>
+
+          <div class="phase reveal">
+            <div class="ph-head"><span class="ph-num">PHASE 1</span><span class="st st-planned">planned</span></div>
+            <h3>Instrument</h3>
+            <p>Get the right telemetry off every host before touching a single detection.</p>
+            <ul>
+              <li>Wazuh agent on all five hosts (GOAD's Wazuh extension or my existing manager)</li>
+              <li>Sysmon with a community config (process, network, named pipes, registry)</li>
+              <li>Advanced audit policy: Kerberos ticket ops, DS access, account management, object access</li>
+              <li>SACLs on tier-0 objects so 4662 and 5136 actually fire</li>
+              <li>PowerShell script-block logging, SYSVOL file integrity monitoring</li>
+            </ul>
+            <div class="exit"><b>exit:</b> every telemetry source named in the matrix is arriving in Wazuh from every host.</div>
+          </div>
+
+          <div class="phase reveal">
+            <div class="ph-head"><span class="ph-num">PHASE 2</span><span class="st st-planned">planned</span></div>
+            <h3>Baseline</h3>
+            <p>Know the "known bad" before changing it.</p>
+            <ul>
+              <li>SharpHound collection from a domain user, graph in BloodHound</li>
+              <li>Record every misconfiguration the GOAD docs list and where it lives</li>
+              <li>Export the alert volume per host for a quiet day (the noise floor)</li>
+            </ul>
+            <div class="exit"><b>exit:</b> graph and inventory committed to the private repo; noise floor documented.</div>
+          </div>
+
+          <div class="phase reveal">
+            <div class="ph-head"><span class="ph-num">PHASE 3</span><span class="st st-planned">planned</span></div>
+            <h3>Detect</h3>
+            <p>One detection per attack path, each mapped to MITRE ATT&amp;CK and tuned against the noise floor.</p>
+            <ul>
+              <li>Author Wazuh rules (or adopt and tune community rules) per matrix row</li>
+              <li>Severity, ATT&amp;CK tag, and a short "what to do" field on every rule</li>
+              <li>Alerts routed to the same Discord channel the rest of the homelab uses</li>
+            </ul>
+            <div class="exit"><b>exit:</b> every matrix row has a rule ID; status moves to <span class="st st-building">building</span>.</div>
+          </div>
+
+          <div class="phase reveal">
+            <div class="ph-head"><span class="ph-num">PHASE 4</span><span class="st st-planned">planned</span></div>
+            <h3>Attack to validate</h3>
+            <p>Purple-team each path using the public GOAD write-ups, from the attacker box, one at a time.</p>
+            <ul>
+              <li>Run the technique; capture the exact command and timestamp</li>
+              <li>Confirm the alert fired; record time-to-detect and any gaps</li>
+              <li>Fix false negatives and re-run until it fires reliably</li>
+            </ul>
+            <div class="exit"><b>exit:</b> matrix row flips to <span class="st st-validated">validated</span>; event logged with ATT&amp;CK ID.</div>
+          </div>
+
+          <div class="phase reveal">
+            <div class="ph-head"><span class="ph-num">PHASE 5</span><span class="st st-planned">planned</span></div>
+            <h3>Harden and re-test</h3>
+            <p>Apply the control the matrix prescribes, then re-run the same attack.</p>
+            <ul>
+              <li>Apply the fix (policy, ACL, template, service setting)</li>
+              <li>Re-run the attack: it must fail, and the attempt must still alert</li>
+              <li>Re-collect BloodHound and diff the graph against the baseline</li>
+            </ul>
+            <div class="exit"><b>exit:</b> matrix row flips to <span class="st st-hardened">hardened</span>; before/after recorded.</div>
+          </div>
+
+          <div class="phase reveal">
+            <div class="ph-head"><span class="ph-num">PHASE 6</span><span class="st st-planned">planned</span></div>
+            <h3>Respond</h3>
+            <p>A runbook per validated detection, exercised at least once.</p>
+            <ul>
+              <li>Contain, scope, and recover steps per alert (credential reset, ticket and certificate revocation, host isolation)</li>
+              <li>Tabletop one full chain end to end, from spray to domain admin</li>
+              <li>Measure time-to-contain the way time-to-detect was measured</li>
+            </ul>
+            <div class="exit"><b>exit:</b> runbook linked from every validated row in the matrix.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COVERAGE MATRIX ===================== -->
+    <section class="section" id="coverage">
+      <div class="container">
+        <span class="eyebrow">03 — Coverage matrix</span>
+        <h2 class="section-title">Every documented GOAD attack path, and my answer to it</h2>
+        <p class="section-lead">Rows come from the GOAD lab documentation. Status columns change only when the log has an entry to back them.</p>
+        <div class="table-wrap reveal">
+          <table class="matrix" id="coverageTable">
+            <thead>
+              <tr>
+                <th>Attack path</th>
+                <th>ATT&amp;CK</th>
+                <th>Telemetry I need</th>
+                <th>Detection</th>
+                <th>Hardening control</th>
+                <th>Hardened</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Password spraying<span class="who">rickon.stark · hodor</span></td>
+                <td><span class="tid">T1110.003</span></td>
+                <td>4625 / 4771 bursts: many accounts, one source, short window</td>
+                <td><span class="st st-planned">planned</span></td>
+                <td>Lockout policy, fine-grained password policy, banned-password list</td>
+                <td><span class="st st-planned">planned</span></td>
+              </tr>
+              <tr>
+                <td>AS-REP roasting<span class="who">brandon.stark · missandei</span></td>
+                <td><span class="tid">T1558.004</span></td>
+                <td>4768 with pre-auth type 0 and RC4 (etype 0x17)</td>
+                <td><span class="st st-planned">planned</span></td>
+                <td>Enforce Kerberos pre-authentication; AES-only encryption types</td>
+                <td><span class="st st-planned">planned</span></td>
+              </tr>
+              <tr>
+                <td>Kerberoasting<span class="who">jon.snow (SPN)</span></td>
+                <td><span class="tid">T1558.003</span></td>
+                <td>4769 RC4 service tickets; burst of TGS requests for distinct SPNs from one user</td>
+                <td><span class="st st-planned">planned</span></td>
+                <td>gMSA or 25+ character service passwords; honeypot SPN account</td>
+                <td><span class="st st-planned">planned</span></td>
+              </tr>
+              <tr>
+                <td>ACL abuse<span class="who">GenericAll · GenericWrite · ForceChangePassword · WriteDACL</span></td>
+                <td><span class="tid">T1098</span> · <span class="tid">T1222.001</span></td>
+                <td>4738 / 4724 password resets, 4728 / 4732 / 4756 group adds, 5136 object changes (needs SACLs)</td>
+                <td><span class="st st-planned">planned</span></td>
+                <td>Strip the rights BloodHound finds; tiered admin model</td>
+                <td><span class="st st-planned">planned</span></td>
+              </tr>
+              <tr>
+                <td>Unconstrained delegation<span class="who">sansa.stark · coercion via spooler</span></td>
+                <td><span class="tid">T1187</span> · <span class="tid">T1550.003</span></td>
+                <td>4624 with TGT-delegated flag; Sysmon 3 to the print spooler; 4769 from the delegating host</td>
+                <td><span class="st st-planned">planned</span></td>
+                <td>Clear TRUSTED_FOR_DELEGATION; Protected Users; "sensitive, cannot be delegated"</td>
+                <td><span class="st st-planned">planned</span></td>
+              </tr>
+              <tr>
+                <td>MSSQL impersonation &amp; trusted links<span class="who">castelblack → braavos</span></td>
+                <td><span class="tid">T1210</span> · <span class="tid">T1059.003</span></td>
+                <td>MSSQL audit: EXECUTE AS, sp_configure changes; Sysmon 1 children of sqlservr.exe; 4688</td>
+                <td><span class="st st-planned">planned</span></td>
+                <td>Disable xp_cmdshell; remove IMPERSONATE grants; de-privilege linked-server logins</td>
+                <td><span class="st st-planned">planned</span></td>
+              </tr>
+              <tr>
+                <td>GPO abuse<span class="who">samwell.tarly · STARKWALLPAPER policy</span></td>
+                <td><span class="tid">T1484.001</span></td>
+                <td>5136 / 5137 on groupPolicyContainer; SYSVOL file integrity (Wazuh syscheck)</td>
+                <td><span class="st st-planned">planned</span></td>
+                <td>Audit GPO delegation; remove edit rights from non-admins</td>
+                <td><span class="st st-planned">planned</span></td>
+              </tr>
+              <tr>
+                <td>LAPS password read<span class="who">jorah.mormont · Spys group</span></td>
+                <td><span class="tid">T1552</span> · <span class="tid">T1087.002</span></td>
+                <td>4662 on the LAPS password attribute with a SACL for non-admin readers</td>
+                <td><span class="st st-planned">planned</span></td>
+                <td>Restrict the extended right to the admin tier; alert on any other reader</td>
+                <td><span class="st st-planned">planned</span></td>
+              </tr>
+              <tr>
+                <td>Shadow credentials<span class="who">khal.drogo · msDS-KeyCredentialLink</span></td>
+                <td><span class="tid">T1098</span> · <span class="tid">T1556</span></td>
+                <td>5136 writes to msDS-KeyCredentialLink; 4768 PKINIT logons for accounts that never used certificates</td>
+                <td><span class="st st-planned">planned</span></td>
+                <td>Remove write rights on the attribute; monitor every change</td>
+                <td><span class="st st-planned">planned</span></td>
+              </tr>
+              <tr>
+                <td>ADCS template abuse<span class="who">braavos CA · ESC-class templates</span></td>
+                <td><span class="tid">T1649</span></td>
+                <td>4886 / 4887 requests with a supplied SAN; 4898 / 4899 template changes; Certipy-style enrolment</td>
+                <td><span class="st st-planned">planned</span></td>
+                <td>Remove ENROLLEE_SUPPLIES_SUBJECT; require manager approval; restrict enrolment rights</td>
+                <td><span class="st st-planned">planned</span></td>
+              </tr>
+              <tr>
+                <td>NTLM relay / name poisoning<span class="who">castelblack · braavos (SMB signing off)</span></td>
+                <td><span class="tid">T1557.001</span></td>
+                <td>4624 type-3 NTLM logons from non-workstation sources; Sysmon 3 to unexpected SMB peers; LLMNR traffic</td>
+                <td><span class="st st-planned">planned</span></td>
+                <td>Require SMB signing; disable LLMNR / NBT-NS; extended protection on LDAP</td>
+                <td><span class="st st-planned">planned</span></td>
+              </tr>
+              <tr>
+                <td>Defender disabled<span class="who">castelblack</span></td>
+                <td><span class="tid">T1562.001</span></td>
+                <td>Defender 5001 / 5010 events; Wazuh security configuration assessment</td>
+                <td><span class="st st-planned">planned</span></td>
+                <td>Re-enable Defender with tamper protection; enforce by GPO</td>
+                <td><span class="st st-planned">planned</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="legend">
+          <span class="st st-planned">planned</span> not started
+          <span class="st st-building">building</span> rule written, not yet proven
+          <span class="st st-validated">validated</span> attack run, alert fired
+          <span class="st st-hardened">hardened</span> control applied, attack re-run and failed
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EVENT LOG ===================== -->
+    <section class="section" id="log">
+      <div class="container">
+        <div class="log-head">
+          <div>
+            <span class="eyebrow">04 — Event log</span>
+            <h2 class="section-title">What has actually happened</h2>
+          </div>
+        </div>
+        <p class="section-lead">Newest first. Every status change in the matrix above has an entry here.</p>
+        <div class="timeline" id="eventLog"></div>
+        <noscript><p class="section-lead">The log needs JavaScript to render. The raw entries are in <code>assets/js/defense-log.js</code>.</p></noscript>
+        <div class="howto">
+          Entries live in <code>assets/js/defense-log.js</code> as plain objects (<code>date</code>, <code>type</code>, <code>title</code>, <code>body</code>, optional <code>tags</code> and <code>link</code>).
+          Types: <code>deploy</code> · <code>telemetry</code> · <code>detection</code> · <code>hardening</code> · <code>exercise</code> · <code>incident</code> · <code>note</code>.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CREDITS ===================== -->
+    <section class="section contact" id="credits">
+      <div class="container">
+        <span class="eyebrow" style="justify-content:center">05 — Credits</span>
+        <h2 class="section-title">Built on other people's good work</h2>
+        <p class="section-lead">
+          GOAD is created and maintained by <a href="https://github.com/Orange-Cyberdefense/GOAD" target="_blank" rel="noopener">Orange Cyberdefense</a>
+          and released under GPL-3.0. Attack techniques referenced here are the ones GOAD documents publicly. I am not affiliated with the project;
+          this page is one defender's programme run on top of it.
+        </p>
+        <div class="contact-actions">
+          <a href="https://orange-cyberdefense.github.io/GOAD/" target="_blank" rel="noopener" class="btn btn-ghost">GOAD documentation</a>
+          <a href="https://attack.mitre.org/" target="_blank" rel="noopener" class="btn btn-ghost">MITRE ATT&amp;CK</a>
+          <a href="index.html#contact" class="btn btn-primary">Talk to me about it</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="brand">JTS<span class="blink">//</span></a>
+      <span>&copy; <span id="year">2026</span> James Tyler Short · Built &amp; hosted on GitHub Pages</span>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox"><button class="lb-close" aria-label="Close">&times;</button><img src="" alt="" id="lbImg" /></div>
+
+  <script src="assets/js/defense-log.js"></script>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

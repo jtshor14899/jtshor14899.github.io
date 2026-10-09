@@ -76,10 +76,41 @@
   document.querySelectorAll('img[data-lightbox]').forEach(function (img) {
     img.addEventListener('click', function () { openLb(img.src, img.alt); });
   });
+  document.querySelectorAll('[data-lightbox-for]').forEach(function (el) {
+    el.addEventListener('click', function () { openLb(el.getAttribute('data-lightbox-for'), ''); });
+  });
   lb.addEventListener('click', closeLb);
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && lb.classList.contains('open')) closeLb();
   });
+
+  /* --- defense page: render the event log from window.DEFENSE_LOG --- */
+  var logEl = document.getElementById('eventLog');
+  if (logEl && window.DEFENSE_LOG) {
+    var entries = window.DEFENSE_LOG.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+    logEl.innerHTML = entries.map(function (e) {
+      var tags = (e.tags || []).map(function (t) { return '<span class="tag">' + t + '</span>'; }).join('');
+      var link = e.link ? ' <a href="' + e.link + '" target="_blank" rel="noopener">details →</a>' : '';
+      return '<div class="tl-item log-' + (e.type || 'note') + '">' +
+        '<div class="tl-when">' + e.date + ' · <span class="log-type">' + (e.type || 'note') + '</span></div>' +
+        '<h3 class="tl-role">' + e.title + '</h3>' +
+        '<p>' + e.body + link + '</p>' +
+        (tags ? '<div class="tags" style="margin-top:10px">' + tags + '</div>' : '') +
+      '</div>';
+    }).join('');
+    var count = document.getElementById('logCount');
+    if (count) count.textContent = entries.length;
+  }
+
+  /* --- defense page: coverage counters from the matrix --- */
+  var matrix = document.getElementById('coverageTable');
+  if (matrix) {
+    var rows = matrix.querySelectorAll('tbody tr');
+    var validated = matrix.querySelectorAll('tbody .st-validated').length;
+    var hardened = matrix.querySelectorAll('tbody .st-hardened').length;
+    var set = function (id, v) { var el = document.getElementById(id); if (el) el.textContent = v; };
+    set('statPaths', rows.length); set('statValidated', validated); set('statHardened', hardened);
+  }
 
   /* --- current year --- */
   var y = document.getElementById('year');

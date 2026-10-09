@@ -34,6 +34,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="defense.html">Defense</a></li>
         <!-- To show these, remove `hidden` from the matching <section> below and re-add the links here:
         <li><a href="#experience">Experience</a></li>
         <li><a href="#certs">Certifications</a></li> -->
@@ -212,8 +213,8 @@
 
         <!-- Featured: threat-dash -->
         <article class="project project-featured reveal">
-          <div class="project-head">
-            <div class="pinfo">
+          <div class="pinfo">
+            <div class="pcopy">
               <div class="badge-row">
                 <span class="badge badge-oss">Open source · MIT</span>
                 <span class="badge badge-live">Maintained</span>
@@ -226,13 +227,6 @@
                 one pane of glass. Built from scratch with the Python standard library and just two
                 dependencies.
               </p>
-              <ul class="feat">
-                <li>Live 3D threat map (globe.gl) plotting attack sources in real time</li>
-                <li>Cloudflare analytics: traffic, WAF blocks, top countries &amp; offending IPs</li>
-                <li>pfSense + Wazuh integrations for firewall and endpoint/SIEM visibility</li>
-                <li>Outbound intel &amp; IOC enrichment — see where workloads phone home</li>
-                <li>One-click edge blocking; pluggable backend client architecture</li>
-              </ul>
               <div class="project-actions">
                 <a href="https://github.com/jtshor14899/threat-dash" target="_blank" rel="noopener" class="btn btn-primary">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.39 1.24-3.23-.13-.31-.54-1.53.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.18.77.84 1.23 1.92 1.23 3.23 0 4.62-2.81 5.64-5.49 5.94.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.58A12.01 12.01 0 0024 12.5C24 5.87 18.63.5 12 .5z"/></svg>
@@ -245,10 +239,18 @@
                 <span class="tag">Wazuh API</span><span class="tag">REST</span>
               </div>
             </div>
-            <div class="pshot">
-              <img src="images/td-hero.png" alt="threat-dash live threat map" loading="lazy" data-lightbox />
-            </div>
+            <ul class="feat">
+              <li>Live 3D threat map (globe.gl) plotting attack sources in real time</li>
+              <li>Cloudflare analytics: traffic, WAF blocks, top countries &amp; offending IPs</li>
+              <li>pfSense + Wazuh integrations for firewall and endpoint/SIEM visibility</li>
+              <li>Outbound intel &amp; IOC enrichment — see where workloads phone home</li>
+              <li>One-click edge blocking; pluggable backend client architecture</li>
+            </ul>
           </div>
+          <figure class="pshot">
+            <div class="frame-bar"><i></i><i></i><i></i><span class="frame-title">threat-dash — live threat map</span></div>
+            <img src="images/td-hero.png" alt="threat-dash live threat map" loading="lazy" data-lightbox />
+          </figure>
           <div class="gallery">
             <figure><img src="images/td-overview.png" alt="threat-dash overview tab" loading="lazy" data-lightbox /><figcaption>Overview &amp; KPIs</figcaption></figure>
             <figure><img src="images/td-blocks.png" alt="threat-dash blocked IPs" loading="lazy" data-lightbox /><figcaption>Edge blocks</figcaption></figure>
@@ -258,8 +260,8 @@
 
         <!-- Ops Console: homelab network visibility -->
         <article class="project project-featured reveal">
-          <div class="project-head">
-            <div class="pinfo">
+          <div class="pinfo">
+            <div class="pcopy">
               <div class="badge-row">
                 <span class="badge badge-live">In daily use</span>
                 <span class="badge">Private repo</span>
@@ -268,39 +270,41 @@
               <p class="ptag">// a phone-first command center for a 40-container homelab</p>
               <p>
                 One static page, installed on the iPhone home screen, that answers "is everything up?"
-                and "what is every device on my network doing?" without a login prompt for the safe
-                parts and a shared token for the sensitive ones. Zero frameworks: vanilla JS, one JSON
-                file of host telemetry, and a 250-line Python API.
+                and "what is every device on my network doing?" — no login prompt for the safe parts,
+                a shared token for the sensitive ones. Zero frameworks: vanilla JS, one JSON file of
+                host telemetry, and a 250-line Python API.
               </p>
-              <ul class="feat">
-                <li><b>Console tab</b> — live up/down for ~30 reverse-proxied services, host pings, disk/memory/VPN tiles, Alertmanager alerts, and one-tap DNS unblocking across two AdGuard Home instances</li>
-                <li><b>Network tab</b> — per-device top domains (1h to 7d) from both DNS query logs, a device inventory merged from DHCP leases + ARP + ping + DNS adoption, AdGuard health with upstream latency, every Caddy route, every Docker network and published port, link throughput</li>
-                <li>Background collector pages the AdGuard API incrementally into an hourly SQLite aggregate (7-day retention); a full week backfills in ~20 s</li>
-                <li>Threat model built in: the API is reachable only from the LAN and the mesh VPN, per-device browsing history needs a token, and the recently-blocked feed is aggregated so it never names a device</li>
-                <li>Encrypted offsite tier for the nightly config backup: rclone crypt to Google Drive with a <code>drive.file</code>-scoped token, secrets kept out of the backup set itself</li>
-              </ul>
               <div class="project-stack">
                 <span class="tag">Vanilla JS</span><span class="tag">Python stdlib</span><span class="tag">SQLite</span>
                 <span class="tag">AdGuard Home API</span><span class="tag">Caddy</span><span class="tag">Docker</span>
                 <span class="tag">NetBird</span><span class="tag">rclone crypt</span><span class="tag">PWA</span>
               </div>
             </div>
-            <div class="pshot">
-              <img src="images/ops-console-network-desktop.png" alt="Ops Console Network tab: DNS traffic per device, device inventory, AdGuard health" loading="lazy" data-lightbox />
-            </div>
+            <ul class="feat">
+              <li><b>Console tab</b> — live up/down for ~30 reverse-proxied services, host pings, disk/memory/VPN tiles, Alertmanager alerts, and one-tap DNS unblocking across two AdGuard Home instances</li>
+              <li><b>Network tab</b> — per-device top domains (1h to 7d) from both DNS query logs, a device inventory merged from DHCP leases + ARP + ping + DNS adoption, AdGuard health with upstream latency, every Caddy route, every Docker network and published port, link throughput</li>
+              <li><b>Collector</b> — pages the AdGuard API incrementally into an hourly SQLite aggregate (7-day retention); a full week backfills in ~20 s</li>
+              <li><b>Threat model built in</b> — the API is reachable only from the LAN and the mesh VPN, per-device browsing history needs a token, and the recently-blocked feed is aggregated so it never names a device</li>
+              <li><b>Encrypted offsite backup</b> — nightly config backup pushed with rclone crypt to Google Drive using a <code>drive.file</code>-scoped token; secrets stay out of the backup set</li>
+            </ul>
           </div>
+          <figure class="pshot tall">
+            <div class="frame-bar"><i></i><i></i><i></i><span class="frame-title">ops console — network tab</span></div>
+            <img src="images/ops-console-network-desktop.png" alt="Ops Console Network tab: DNS traffic per device, device inventory, AdGuard health" loading="lazy" data-lightbox />
+            <span class="expand" data-lightbox-for="images/ops-console-network-desktop.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg> full screenshot</span>
+          </figure>
           <div class="gallery">
+            <figure><img src="images/ops-console-console-desktop.png" alt="Ops Console on desktop" loading="lazy" data-lightbox /><figcaption>Console tab (desktop)</figcaption></figure>
             <figure><img src="images/ops-console-console-phone.png" alt="Ops Console on a phone: service tiles and health readout" loading="lazy" data-lightbox /><figcaption>Console tab (phone)</figcaption></figure>
             <figure><img src="images/ops-console-network-phone.png" alt="Network tab on a phone: per-device DNS traffic cards" loading="lazy" data-lightbox /><figcaption>Network tab (phone)</figcaption></figure>
-            <figure><img src="images/ops-console-console-desktop.png" alt="Ops Console on desktop" loading="lazy" data-lightbox /><figcaption>Console tab (desktop)</figcaption></figure>
           </div>
-          <p class="section-lead" style="padding:0 38px 30px;margin:0;font-size:.82rem">Screenshots are rendered from a demo build with synthetic data: hostnames, addresses and domains shown are not the real network.</p>
+          <p class="footnote">Screenshots are rendered from a demo build with synthetic data: hostnames, addresses and domains shown are not the real network.</p>
         </article>
 
         <!-- AD homelab -->
         <article class="project reveal">
-          <div class="project-head">
-            <div class="pinfo">
+          <div class="pinfo">
+            <div class="pcopy">
               <div class="badge-row">
                 <span class="badge">Lab build</span>
               </div>
@@ -310,23 +314,24 @@
                 A fully functional Windows domain environment built to internalize enterprise
                 identity and access management — designed, deployed, and validated end-to-end.
               </p>
-              <ul class="feat">
-                <li>Windows Server 2019 domain controller with 150+ users and a tiered admin model</li>
-                <li>OU design separating admins, users, and resources; role-based security groups with nesting</li>
-                <li>NTFS permissions driven by group membership; GPO mapped drives via item-level targeting</li>
-                <li>DHCP scope (172.16.0.0/24) with reservations and scope options for gateway/DNS/domain</li>
-                <li>Verified the full chain: authenticate → GPO processing → drive map → scoped file access</li>
-              </ul>
               <div class="project-stack">
                 <span class="tag">Windows Server 2019</span><span class="tag">Active Directory</span>
                 <span class="tag">Group Policy</span><span class="tag">DHCP / DNS</span>
                 <span class="tag">NTFS / RBAC</span>
               </div>
             </div>
-            <div class="pshot">
-              <img src="images/homelab_ad_network_diagram.jpg" alt="Active Directory homelab network diagram" loading="lazy" data-lightbox />
-            </div>
+            <ul class="feat">
+              <li>Windows Server 2019 domain controller with 150+ users and a tiered admin model</li>
+              <li>OU design separating admins, users, and resources; role-based security groups with nesting</li>
+              <li>NTFS permissions driven by group membership; GPO mapped drives via item-level targeting</li>
+              <li>DHCP scope (172.16.0.0/24) with reservations and scope options for gateway/DNS/domain</li>
+              <li>Verified the full chain: authenticate → GPO processing → drive map → scoped file access</li>
+            </ul>
           </div>
+          <figure class="pshot fit">
+            <div class="frame-bar"><i></i><i></i><i></i><span class="frame-title">lab network diagram</span></div>
+            <img src="images/homelab_ad_network_diagram.jpg" alt="Active Directory homelab network diagram" loading="lazy" data-lightbox />
+          </figure>
           <div class="gallery">
             <figure><img src="images/DHCP.png" alt="DHCP scope configuration" loading="lazy" data-lightbox /><figcaption>DHCP scope</figcaption></figure>
             <figure><img src="images/File-Permissions.png" alt="Active Directory OU and security group structure" loading="lazy" data-lightbox /><figcaption>OU &amp; groups</figcaption></figure>
@@ -337,31 +342,34 @@
 
         <!-- Homelab SecOps stack (compact) -->
         <article class="project reveal">
-          <div class="project-head">
-            <div class="pinfo">
+          <div class="pinfo">
+            <div class="pcopy">
               <div class="badge-row"><span class="badge">Ongoing</span></div>
               <h3>Security Operations Homelab</h3>
               <p class="ptag">// a personal SOC lab for detection, monitoring, and response</p>
               <p>
                 The platform behind everything else: a virtualized cluster running the security
-                stack I learn and experiment on. It's where threat-dash gets its real data.
+                stack I learn and experiment on. It's where threat-dash gets its real data, and
+                where the <a href="defense.html">GOAD blue-team program</a> runs.
               </p>
-              <ul class="feat">
-                <li>Proxmox virtualization cluster hosting Linux and Windows workloads</li>
-                <li>Wazuh SIEM/XDR deployed for endpoint telemetry, FIM, and vulnerability detection</li>
-                <li>Docker Compose service stack behind a Caddy reverse proxy with TLS</li>
-                <li>Cloudflare-fronted services and health-check alerting to a phone via push</li>
-                <li>Two-tier DNS (AdGuard Home as LAN DHCP + filtering) with the Ops Console above for per-device visibility</li>
-              </ul>
               <div class="project-stack">
                 <span class="tag">Proxmox</span><span class="tag">Wazuh</span><span class="tag">Docker</span>
                 <span class="tag">Caddy</span><span class="tag">Cloudflare</span><span class="tag">Linux</span>
               </div>
             </div>
-            <div class="pshot">
-              <img src="images/td-overview.png" alt="Security operations dashboard overview" loading="lazy" data-lightbox />
-            </div>
+            <ul class="feat">
+              <li>Proxmox virtualization cluster hosting Linux and Windows workloads</li>
+              <li>Wazuh SIEM/XDR deployed for endpoint telemetry, FIM, and vulnerability detection</li>
+              <li>Docker Compose service stack behind a Caddy reverse proxy with TLS</li>
+              <li>Cloudflare-fronted services and health-check alerting to a phone via push</li>
+              <li>Two-tier DNS (AdGuard Home as LAN DHCP + filtering) with the Ops Console above for per-device visibility</li>
+            </ul>
           </div>
+          <figure class="pshot tall">
+            <div class="frame-bar"><i></i><i></i><i></i><span class="frame-title">ops console — console tab</span></div>
+            <img src="images/ops-console-console-desktop.png" alt="Ops Console service health overview" loading="lazy" data-lightbox />
+            <span class="expand" data-lightbox-for="images/ops-console-console-desktop.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg> full screenshot</span>
+          </figure>
         </article>
 
       </div>
