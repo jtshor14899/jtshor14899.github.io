@@ -359,7 +359,7 @@
             </div>
             <ul class="feat">
               <li>Proxmox virtualization cluster hosting Linux and Windows workloads</li>
-              <li>Wazuh SIEM/XDR deployed for endpoint telemetry, FIM, and vulnerability detection</li>
+              <li>Wazuh SIEM/XDR deployed for endpoint telemetry, file integrity monitoring, and custom detection rules</li>
               <li>Docker Compose service stack behind a Caddy reverse proxy with TLS</li>
               <li>Cloudflare-fronted services and health-check alerting to a phone via push</li>
               <li>Two-tier DNS (AdGuard Home as LAN DHCP + filtering) with the Ops Console above for per-device visibility</li>
@@ -369,6 +369,101 @@
             <div class="frame-bar"><i></i><i></i><i></i><span class="frame-title">ops console — console tab</span></div>
             <img src="images/ops-console-console-desktop.png" alt="Ops Console service health overview" loading="lazy" data-lightbox />
             <span class="expand" data-lightbox-for="images/ops-console-console-desktop.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg> full screenshot</span>
+          </figure>
+        </article>
+
+        <!-- Platform & change management -->
+        <article class="project reveal">
+          <div class="pinfo">
+            <div class="pcopy">
+              <div class="badge-row">
+                <span class="badge badge-live">In daily use</span>
+                <span class="badge">Private repo</span>
+              </div>
+              <h3>Homelab Platform &amp; Change Management</h3>
+              <p class="ptag">// ~70 containers, operated like production</p>
+              <p>
+                One Proxmox VM runs about 70 Docker containers. I treat it like a production system:
+                every change is gated, verified, documented, and recoverable. A private Git repo with
+                430+ commits is both the record of the system and its disaster-recovery bundle.
+              </p>
+              <div class="project-stack">
+                <span class="tag">Proxmox</span><span class="tag">Docker Compose</span><span class="tag">Linux</span>
+                <span class="tag">systemd</span><span class="tag">GitHub Actions</span><span class="tag">gitleaks</span>
+                <span class="tag">SOPS / age</span><span class="tag">Infisical</span><span class="tag">Cloudflare Tunnel</span>
+              </div>
+            </div>
+            <ul class="feat">
+              <li><b>Zero-downtime changes</b>: a guard script records the health of every container before a change and compares it after. Reload beats restart, and restart beats recreate.</li>
+              <li><b>Repo as source of truth</b>: sanitized configs, encrypted secrets, and a restore map that rebuilds the host from scratch</li>
+              <li><b>Secret hygiene</b>: secret scanning in CI and in a pre-commit hook, plus a self-hosted secrets manager. One leaked credential was caught, rotated, and purged from history.</li>
+              <li><b>No open ports</b>: the public edge runs through Cloudflare Tunnel and Access, admin access goes over a mesh VPN, and internal services stay LAN-only</li>
+              <li><b>Automated maintenance</b>: nightly OS and image updates with health checks and automatic rollback, encrypted offsite backups, and a daily digest of every change</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- AI operations agents -->
+        <article class="project reveal">
+          <div class="pinfo">
+            <div class="pcopy">
+              <div class="badge-row">
+                <span class="badge badge-live">In daily use</span>
+                <span class="badge">Private repo</span>
+              </div>
+              <h3>AI Operations Agents</h3>
+              <p class="ptag">// LLM agents watch the lab; a human approves every fix</p>
+              <p>
+                Scheduled Claude agents audit the homelab and report to Discord. They run read-only.
+                Any action that could cause downtime becomes an Approve button that runs a fixed,
+                pre-written job, so an agent never gets a shell to make changes.
+              </p>
+              <div class="project-stack">
+                <span class="tag">Python</span><span class="tag">Claude Agent SDK</span><span class="tag">Discord API</span>
+                <span class="tag">Bash</span><span class="tag">cron</span>
+              </div>
+            </div>
+            <ul class="feat">
+              <li><b>Daily hardening audit</b>: rotates through seven security areas by weekday</li>
+              <li><b>Watchers</b>: agents that triage failed scheduled jobs, unhealthy services, and disk growth, and name the root cause</li>
+              <li><b>Human in the loop</b>: proposed fixes arrive as parameterized jobs behind a Discord button</li>
+              <li><b>AI-reviewed updates</b>: a model reviews every pending software update before nightly maintenance applies it</li>
+              <li><b>Cost control</b>: every call goes through one wrapper that spends plan credits first and falls back at the cap, with a usage dashboard</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Smart home -->
+        <article class="project reveal">
+          <div class="pinfo">
+            <div class="pcopy">
+              <div class="badge-row">
+                <span class="badge badge-live">In daily use</span>
+                <span class="badge">Private repo</span>
+              </div>
+              <h3>3D Smart-Home Dashboard</h3>
+              <p class="ptag">// tap a photoreal floor plan to control the house</p>
+              <p>
+                A phone-first Home Assistant dashboard built on a 3D render of the apartment. Python
+                generates the scene from the robot vacuum's map, and each lamp lights up on the plan
+                when it turns on.
+              </p>
+              <div class="project-stack">
+                <span class="tag">Home Assistant</span><span class="tag">Python</span><span class="tag">Blender (bpy)</span>
+                <span class="tag">Web Components</span><span class="tag">YAML</span><span class="tag">Jinja</span>
+              </div>
+            </div>
+            <ul class="feat">
+              <li><b>Procedural render</b>: a Blender script builds the walls, doors, and furniture from the vacuum map, then renders a base image plus one light layer per lamp</li>
+              <li><b>Live state</b>: light layers blend in as lamps switch on, and sliders dim the bulbs</li>
+              <li><b>Robot vacuum</b>: integrated after a code review of the third-party integration. A custom web component maps its live position onto the plan (calibration in progress).</li>
+              <li><b>Energy sensors</b>: whole-home power and monthly energy from smart plugs, plus lifetime cleaning stats</li>
+              <li><b>Upstream fix</b>: traced bulb dropouts to a request-overlap bug and <a href="https://github.com/python-kasa/python-kasa/issues/1837">reported it to python-kasa</a> with logs and a repro</li>
+            </ul>
+          </div>
+          <figure class="pshot fit">
+            <div class="frame-bar"><i></i><i></i><i></i><span class="frame-title">floor plan — lamps on</span></div>
+            <img src="images/smart-home-floorplan.jpg" alt="Top-down 3D render of an apartment with lamps lit" loading="lazy" data-lightbox />
           </figure>
         </article>
 
